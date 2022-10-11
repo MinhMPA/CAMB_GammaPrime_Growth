@@ -235,6 +235,8 @@ def set_params_cosmomc(p, num_massive_neutrinos=1, neutrino_hierarchy='degenerat
     pars.set_cosmology(H0=p['H0'], ombh2=p['omegabh2'], omch2=p['omegach2'], mnu=p.get('mnu', 0.06),
                        omk=p.get('omegak', 0), tau=p['tau'], deltazrei=p.get('deltazrei', None),
                        nnu=p.get('nnu', constants.default_nnu), Alens=p.get('Alens', 1.0),
+                       gamma0=p.get('gamma0', 0.55),
+                       gamma1=p.get('gamma1', 0.0),
                        YHe=p.get('yheused', None), meffsterile=p.get('meffsterile', 0),
                        num_massive_neutrinos=num_massive_neutrinos, neutrino_hierarchy=neutrino_hierarchy)
     pars.InitPower.set_params(ns=p['ns'], r=p.get('r', 0), As=p['A'] * 1e-9, nrun=p.get('nrun', 0),
