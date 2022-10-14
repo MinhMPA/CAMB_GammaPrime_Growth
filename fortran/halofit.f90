@@ -2105,7 +2105,11 @@ contains
     INTEGER, PARAMETER :: ifind=ifind_sigma_interpolation
     INTEGER, PARAMETER :: imeth=imeth_sigma_interpolation
 
-    sigma_lut=grow(z,cosm)*exp(find(log(r),cosm%log_r_sigma,cosm%log_sigma,cosm%nsig,iorder,ifind,imeth))
+    IF (cosm%gamma0==0.55_dl .and. cosm%gamma1==0._dl) THEN
+        sigma_lut=grow(z,cosm)*exp(find(log(r),cosm%log_r_sigma,cosm%log_sigma,cosm%nsig,iorder,ifind,imeth))
+    ELSE
+        sigma_lut=growint(z,cosm,.TRUE.)*exp(find(log(r),cosm%log_r_sigma,cosm%log_sigma,cosm%nsig,iorder,ifind,imeth))
+    END IF
 
     END FUNCTION sigma_lut
 
