@@ -626,10 +626,11 @@ contains
                 call this%halomod(k,p1h,p2h,pfull,plin,lut,cosi)
                 if(this%imead==3) then
                     if (cosi%gamma0/=0.55_dl .or. cosi%gamma1/=0._dl) then
-                        plin=p_lin(k,z,0,cosi)/(growint(z,cosi,.TRUE.)**2)*(grow(z,cosi)**2)
+                        plin=(p_lin(k,z,0,cosi)/(growint(z,cosi,.TRUE.)**2))*(grow(z,cosi)**2)
                     end if
                     !Here, plin must be the gamma=0.55 case, as assumed by the main CAMB module
-                    !So we divide by the D^2(z,gamma) that was applied earlier and multiply by the D^2(z) from the ODE solution
+                    !So we undo the growth that was applied earlier by dividing out D^2(z,gamma) from the numerical integral
+                    !and multiply by the D^2(z) from the ODE solution
                     CAMB_Pk%nonlin_ratio(i,j)=sqrt(pfull/plin)
                 else if(this%imead==4) then
                     p_den(i,j)=pfull
@@ -656,10 +657,11 @@ contains
                 plin=p_lin(k,z,0,cosi)
                 call this%halomod(k,p1h,p2h,pfull,plin,lut,cosi)
                 if (cosi%gamma0/=0.55_dl .or. cosi%gamma1/=0._dl) then
-                    plin=p_lin(k,z,0,cosi)/(growint(z,cosi,.TRUE.)**2)*(grow(z,cosi)**2)
+                    plin=(p_lin(k,z,0,cosi)/(growint(z,cosi,.TRUE.)**2))*(grow(z,cosi)**2)
                 end if
                 !Here, plin must be the gamma=0.55 case, as assumed by the main CAMB module
-                !So we divide by the D^2(z,gamma) that was applied earlier and multiply by the D^2(z) from the ODE solution
+                !So we undo the growth that was applied earlier by dividing out D^2(z,gamma) from the numerical integral
+                !and multiply by the D^2(z) from the ODE solution
                 CAMB_Pk%nonlin_ratio(i,j)=sqrt(pfull/plin)
             END DO
             !$OMP end PARALLEL DO
@@ -1732,7 +1734,7 @@ contains
     if (z==0.0_dl) then
         growth2 = 1
     else if (z==cosm%this_z) then
-        growth2 = cosm%grow2_z !Use gamma=0.55 growth factor
+        growth2 = cosm%grow2_z !Use whatever D^2(z) computed in fill_plintab
     else
         growth2=grow(z,cosm)**2 !Should never actually be executed
     end if
