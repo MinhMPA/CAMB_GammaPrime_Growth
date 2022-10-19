@@ -1129,11 +1129,13 @@ contains
     integer, intent(IN) :: iz
 
     !Fill linear power table and grows it to z=0
-    if (cosm%gamma0==0.55_dl .and. cosm%gamma1==0._dl) then
-        call fill_plintab(iz,cosm,CAMB_PK,.FALSE.)
-    else
-        call fill_plintab(iz,cosm,CAMB_PK,.TRUE.)
-    end if
+    !if (cosm%gamma0==0.55_dl .and. cosm%gamma1==0._dl) then
+        !call fill_plintab(iz,cosm,CAMB_PK,.FALSE.)
+    !else
+        !call fill_plintab(iz,cosm,CAMB_PK,.TRUE.)
+    !end if
+    call fill_plintab(iz,cosm,CAMB_PK,.TRUE.)
+    !Default to using gamma-approx.
 
     !Fill sigma(r) table
     call fill_sigtab(this,cosm)
@@ -1843,11 +1845,13 @@ contains
     f = exp(-(k*sigv)**2)
     !p_dewiggle = p_linear+(f-1.)*p_wiggle*grow(z, cosm)**2
     !Commented out the old default above
-    if (cosm%gamma0==0.55_dl .and. cosm%gamma1==0._dl) then
-        p_dewiggle = p_linear+(f-1)*p_wiggle*grow(z, cosm)**2
-    else
-        p_dewiggle = p_linear+(f-1.)*p_wiggle*(growint(z, cosm,.TRUE.)**2)
-    end if
+    !if (cosm%gamma0==0.55_dl .and. cosm%gamma1==0._dl) then
+        !p_dewiggle = p_linear+(f-1)*p_wiggle*grow(z, cosm)**2
+    !else
+        !p_dewiggle = p_linear+(f-1.)*p_wiggle*(growint(z, cosm,.TRUE.)**2)
+    !end if
+    p_dewiggle = p_linear+(f-1.)*p_wiggle*(growint(z, cosm,.TRUE.)**2)
+    !Default to using gamma-approx.
 
     end function p_dewiggle
 
@@ -2110,11 +2114,13 @@ contains
     integer, parameter :: ifind=ifind_sigma_interpolation
     integer, parameter :: imeth=imeth_sigma_interpolation
 
-    if (cosm%gamma0==0.55_dl .and. cosm%gamma1==0._dl) then
-        sigma_lut=grow(z,cosm)*exp(find(log(r),cosm%log_r_sigma,cosm%log_sigma,cosm%nsig,iorder,ifind,imeth))
-    else
-        sigma_lut=growint(z,cosm,.TRUE.)*exp(find(log(r),cosm%log_r_sigma,cosm%log_sigma,cosm%nsig,iorder,ifind,imeth))
-    end if
+    !if (cosm%gamma0==0.55_dl .and. cosm%gamma1==0._dl) then
+        !sigma_lut=grow(z,cosm)*exp(find(log(r),cosm%log_r_sigma,cosm%log_sigma,cosm%nsig,iorder,ifind,imeth))
+    !else
+        !sigma_lut=growint(z,cosm,.TRUE.)*exp(find(log(r),cosm%log_r_sigma,cosm%log_sigma,cosm%nsig,iorder,ifind,imeth))
+    !end if
+    sigma_lut=growint(z,cosm,.TRUE.)*exp(find(log(r),cosm%log_r_sigma,cosm%log_sigma,cosm%nsig,iorder,ifind,imeth))
+    !Default to using gamma-approx.
 
     end function sigma_lut
 
@@ -2289,8 +2295,6 @@ contains
 
     end function sigma_integral
 
-    !Mods start here
-    !Add if check for gamma parametrization, executes whenever gamma0!=0.55 .and. gamma1==0
     function sigma_integrand(t,R,z,itype,cosm)
     !The integrand for the sigma(R) integrals
     real(dl) :: sigma_integrand
@@ -2312,7 +2316,6 @@ contains
     end if
 
     end function sigma_integrand
-    !Mods end here
 
     function integrate(a,b,f,y,z,itype,cosm,acc,iorder)
     !Integrates between a and b until desired accuracy is reached
@@ -2634,8 +2637,6 @@ contains
 
     end function sigmaV
 
-    !Mods start here
-    !Add if check for gamma parametrization, executes whenever gamma0!=0.55 .and. gamma1==0
     function sigmaV_integrand(t,R,z,itype,cosm)
     !This is the integrand for the velocity dispersion integral
     real(dl) :: sigmaV_integrand
@@ -2685,7 +2686,6 @@ contains
     end if
 
     end function neff_integrand
-    !Mods end here
 
     function Si(x)
 
