@@ -1,6 +1,20 @@
 ===================
 CAMB_GAMMAPRIME
 ===================
+
+========================================================
+
+This is a fork of the original CAMB code, whose original README.srt reads as below this box. We modify the original code such that the nonlinear $P(k,z)$ accounts for modified linear growth rate of large-scale structure, of the form
+
+$$
+f(z)=\Omega_m(z)^\gamma(z),
+$$
+where $\gamma(z)=\gamma_0+\gamma_1\,z$.
+
+We name this modified version :CAMB_GammaPrime:
+
+========================================================
+
 :CAMB: Code for Anisotropies in the Microwave Background
 :Author: Antony Lewis and Anthony Challinor
 :Homepage: https://camb.info/
@@ -19,18 +33,6 @@ CAMB_GAMMAPRIME
 Description and installation
 =============================
 
-------------------------------------------------------
-
-This is a fork of the original CAMB code, whose original README.srt reads as below this box. We modify the original code such that the nonlinear $P(k,z)$ accounts for modified linear growth rate of large-scale structure, of the form
-
-$$
-f(z)=\Omega_m(z)^\gamma(z),
-$$
-where $\gamma(z)=\gamma_0+\gamma_1\,z$.
-
-We name this modified version CAMB_GammaPrime !!!
-
-------------------------------------------------------
 CAMB is a cosmology code for calculating cosmological observables, including
 CMB, lensing, source count and 21cm angular power spectra, matter power spectra, transfer functions
 and background evolution. The code is in Python, with numerical code implemented in fast modern Fortran.
