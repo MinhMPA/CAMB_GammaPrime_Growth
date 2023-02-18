@@ -517,7 +517,8 @@
 
     call Ini%Read('Alens', P%Alens)
     !Mods start here
-    !Add two gamma parameters for gamma-prime parametrization of growth, where growth rate f(z) = Omega_m(z)^gamma(z) where gamma(z) = gamma0 + gamma1*z
+    !Add two gamma parameters for gamma-prime parametrization of growth, where growth rate f(z) = Omega_m(z)^gamma(z) where
+    !gamma(z) = gamma0 + gamma1*(z^2)
     call Ini%Read('gamma0', P%gamma0)
     call Ini%Read('gamma1', P%gamma1)
     !Mods end here

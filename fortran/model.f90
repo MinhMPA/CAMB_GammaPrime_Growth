@@ -166,7 +166,8 @@
 
         real(dl)  :: Alens = 1._dl !Unphysical rescaling parameter of the CMB lensing power
         !Mods start here
-        !Add two gamma parameters for gamma-prime parametrization of growth, where growth rate f(z) = Omega_m(z)^gamma(z) where gamma(z) = gamma0 + gamma1*z
+        !Add two gamma parameters for gamma-prime parametrization of growth, where growth rate f(z) = Omega_m(z)^gamma(z) where
+        !gamma(z) = gamma0 + gamma1*(z^2)
         real(dl) :: gamma0 = 0.55_dl
         real(dl) :: gamma1 = 0._dl
         !Mods end here
