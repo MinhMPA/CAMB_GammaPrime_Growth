@@ -4,7 +4,7 @@ CAMB_GAMMAPRIME
 
 ========================================================
 
-This is a fork of the original CAMB code, whose original README.srt reads as below this box. We modify the original code such that the nonlinear $P(k,z)$ accounts for modified linear growth rate of large-scale structure, of the form $f(z)=\Omega_m(z)^{\gamma(z)}$, where $\gamma(z)=\gamma_0+\gamma_1 z$.
+This is a fork of the original CAMB code, whose original README.srt reads as below this box. We modify the original code such that the nonlinear :math:`P(k,z)`:math: accounts for modified linear growth rate of large-scale structure, of the form :math:`f(z)=\Omega_m(z)^{\gamma(z)}`:math:, where :math:`\gamma(z)=\gamma_0+\gamma_1 z`:math:.
 
 We name this modified version CAMB_GammaPrime. If you use it for your research, please consider citing the paper below in yours:
 
