@@ -42,6 +42,7 @@
     !AL Jul 19: Speedups, use linear interpolation for pk; find index using fixed spacing; precompute growth(z)
     !AL Sep 19: Propagate errors rather than stop, decrease jmax for integration time out (prevent very slow error)
     !AM Sep 20: Added HMcode-2020 model
+    !AM Jan 23: Fixed HMcode-2020 feedback low-k predictions
     !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     module NonLinear
@@ -756,14 +757,14 @@ contains
         real(dl) :: kstar
         type(HM_tables), intent(IN) :: lut
 
-        if(this%imead==0 .OR. this%imead==4 .OR. this%imead==5) then
+        if(this%imead==0) then
             !Set to zero for the standard Poisson one-halo term
             kstar=0.
         else if(this%imead==1 .or. this%imead==2) then
             !One-halo cut-off wavenumber
             !Mead et al. (2015; arXiv 1505.07833) value
             kstar=0.584*(lut%sigv)**(-1.)
-        else if(this%imead==3) then
+        else if(this%imead==3 .OR. this%imead==4 .OR. this%imead==5) then
             kstar=0.05618*lut%sig8z_cold**(-1.013)
         end if
 
@@ -1819,7 +1820,7 @@ contains
         end if
         !Damping of the one-halo term at very large scales
         p_1h=p_1h*(1.-fac)
-    else if(this%imead==3) then
+    else if(this%imead==3 .OR. this%imead==4 .OR. this%imead==5) then
         ks=this%kstar(lut)
         x=(k/ks)**4
         p_1h=p_1h*x/(1.+x)
