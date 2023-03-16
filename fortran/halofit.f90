@@ -1530,7 +1530,7 @@ contains
     else if(cosm%w>-1) then
         gam=0.55+0.05*(1.+cosm%w)
     else if(gamma_prime) then
-        gam=cosm%gamma0+cosm%gamma1*(z*z)
+        gam=cosm%gamma0+cosm%gamma1*(z*z)/(1.+z)
     else
         gam=0.55
     end if
