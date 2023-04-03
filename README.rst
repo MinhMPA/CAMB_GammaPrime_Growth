@@ -10,6 +10,10 @@ We name this modified version CAMB_GammaPrime. If you use it for your research, 
 
 https://arxiv.org/abs/2302.01331
 
+**NOTE #1**: This implementation considers scale-*independent* growth. In that regard, it differs from, e.g. MGCAMB, which considers scale-*dependent* growth when varying gamma.
+
+**NOTE #2**: Please pay attention to Eqs. (3)-(4) in the above paper and note our convention for normalizing the (linear) matter power spectrum and the (linear) growth factor
+
 ========================================================
 
 :CAMB: Code for Anisotropies in the Microwave Background
